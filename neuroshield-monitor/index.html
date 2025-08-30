@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroShield Monitor</title>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --secondary: #0ea5e9;
+            --background: #111827;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            font-size: 0.875rem;
+        }
+
+        .status-badge.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.75rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-value.blue {
+            color: var(--secondary);
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 0.75rem;
+        }
+
+        .activity-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(124, 58, 237, 0.1);
+            border-radius: 0.5rem;
+            color: var(--primary);
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .metric-value.animate {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- System Status Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2>System Status</h2>
+                <div class="status-badge">
+                    <span class="status-dot">●</span>
+                    Protected
+                </div>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric">
+                    <div class="metric-value">97%</div>
+                    <div class="metric-label">Uptime</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value blue">0</div>
+                    <div class="metric-label">Active Threats</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">324</div>
+                    <div class="metric-label">Monitored Files</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value blue">12</div>
+                    <div class="metric-label">Connected Devices</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Recent Activity</h2>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">📄</div>
+                    <div class="activity-content">
+                        <div class="activity-title">New file monitored: system.log</div>
+                        <div class="activity-time">2 minutes ago</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">🔒</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Security scan completed</div>
+                        <div class="activity-time">15 minutes ago</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">💾</div>
+                    <div class="activity-content">
+                        <div class="activity-title">New device connected: USB Drive</div>
+                        <div class="activity-time">1 hour ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resource Monitor Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Resource Monitor</h2>
+                <div class="status-badge warning">
+                    <span class="status-dot">●</span>
+                    High Usage
+                </div>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric">
+                    <div class="metric-value animate">78%</div>
+                    <div class="metric-label">CPU Usage</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value blue">6.2GB</div>
+                    <div class="metric-label">Memory Used</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">87%</div>
+                    <div class="metric-label">Disk Space</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value blue">45MB/s</div>
+                    <div class="metric-label">Network</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Overview Card -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Security Overview</h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric">
+                    <div class="metric-value">157</div>
+                    <div class="metric-label">Threats Blocked</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value blue">24/7</div>
+                    <div class="metric-label">Monitoring</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Security Levels</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value blue">99%</div>
+                    <div class="metric-label">Protection</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add pulse animation to high-value metrics
+        document.addEventListener('DOMContentLoaded', () => {
+            const highValueMetrics = document.querySelectorAll('.metric-value');
+            highValueMetrics.forEach(metric => {
+                const value = parseFloat(metric.textContent);
+                if (value > 75) {
+                    metric.classList.add('animate');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

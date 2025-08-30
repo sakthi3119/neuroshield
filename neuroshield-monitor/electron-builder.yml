@@ -1,0 +1,123 @@
+appId: com.neuroshield.monitor
+productName: NeuroShield Monitor
+copyright: Copyright © 2025 NeuroShield Team
+directories:
+  output: dist
+  buildResources: build
+
+# Build configuration
+files:
+  - "**/*"
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+  - "!**/node_modules/.bin"
+  - "!**/*.{o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+
+extraResources:
+  - from: "../hardware_monitoring"
+    to: "hardware_monitoring"
+    filter:
+      - "**/*"
+
+# Windows specific config
+win:
+  target: nsis
+  icon: "build/icon.ico"
+  publisherName: "NeuroShield Team"
+  fileAssociations:
+    - ext: nshield
+      name: "NeuroShield Project"
+      description: "NeuroShield Project File"
+      icon: "build/file.ico"
+
+# macOS specific config
+mac:
+  category: public.app-category.utilities
+  target: dmg
+  icon: "build/icon.icns"
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: "build/entitlements.mac.plist"
+  entitlementsInherit: "build/entitlements.mac.plist"
+  extendInfo:
+    NSCameraUsageDescription: "NeuroShield needs access to your camera for video monitoring."
+    NSMicrophoneUsageDescription: "NeuroShield needs access to your microphone for audio monitoring."
+
+# Linux specific config
+linux:
+  target: ["AppImage", "deb", "rpm"]
+  icon: "build/icon.png"
+  category: "Utility"
+  maintainer: "NeuroShield Team"
+  vendor: "NeuroShield"
+  synopsis: "Advanced Security Monitoring System"
+  description: |
+    NeuroShield is an advanced security monitoring system that provides
+    real-time protection against various security threats.
+
+# Build configuration
+publish:
+  provider: github
+  releaseType: release
+
+afterSign: "scripts/notarize.js"
+
+# Compression level
+compression: maximum
+
+# Remove console logs in production
+extraMetadata:
+  main: "src/main/main.js"
+  version: "1.0.0"
+  author:
+    name: "NeuroShield Team"
+    email: "support@neuroshield.com"
+    url: "https://neuroshield.com"
+  description: "Advanced Security Monitoring System with AI-powered threat detection"
+  repository:
+    type: "git"
+    url: "https://github.com/yourusername/neuroshield-monitor"
+  bugs:
+    url: "https://github.com/yourusername/neuroshield-monitor/issues"
+  homepage: "https://neuroshield.com"
+  license: "MIT"
+  private: true
+
+# NSIS configuration for Windows installer
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: "NeuroShield Monitor"
+  uninstallDisplayName: "NeuroShield Monitor"
+  include: "build/installer.nsh"
+  license: "LICENSE"
+  deleteAppDataOnUninstall: false
+
+# DMG configuration for macOS
+dmg:
+  contents:
+    - x: 130
+      y: 220
+      type: "file"
+    - x: 410
+      y: 220
+      type: "link"
+      path: "/Applications"
+  window:
+    size:
+      width: 540
+      height: 380
+  background: "build/background.png"
+  iconSize: 128
+  iconTextSize: 16
+  title: "${productName} ${version}"
+
+# AppImage configuration for Linux
+appImage:
+  category: "Utility"
+  synopsis: "${description}"
+  description: |
+    NeuroShield is an advanced security monitoring system that provides
+    real-time protection against various security threats.

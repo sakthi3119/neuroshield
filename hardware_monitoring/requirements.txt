@@ -1,0 +1,9 @@
+torch
+transformers
+sentence-transformers
+openai
+scikit-learn
+numpy
+pandas
+tqdm
+# jnsy qkpo ldoh weup
