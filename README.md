@@ -582,7 +582,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- Built for **Hackify 2.0** hackathon
 - Inspired by enterprise DLP solutions (Forcepoint, McAfee)
 - ML models based on research from:
   - Liu, F. et al. (2008). "Isolation Forest"
@@ -595,7 +594,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Project Maintainer:** NeuroShield Team
 
 For questions, issues, or enterprise licensing:
-- Email: contact@neuroshield.dev
 - GitHub Issues: [Create an issue](https://github.com/yourusername/neuroshield/issues)
 
 ---
